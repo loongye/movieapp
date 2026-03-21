@@ -16,11 +16,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor="#9CA3AF"
-        onChangeText={onSearch}
+        onChangeText={onSearch} // This already exists, keeping it for clarity
       />
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

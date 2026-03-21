@@ -21,6 +21,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
   );
 };
 
+
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#E5E5E5',

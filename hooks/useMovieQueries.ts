@@ -52,3 +52,12 @@ export const useMovieRecommendations = (movieId: number, page = 1) => {
     enabled: !!movieId,
   });
 };
+
+export const useSearchMovies = (query: string, page = 1) => {
+  return useQuery({
+    queryKey: ['movies', 'search', query, page],
+    queryFn: () => tmdbService.searchMovies(query, page),
+    enabled: !!query,
+  });
+};
+

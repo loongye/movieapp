@@ -26,13 +26,14 @@ const Logo = () => (
 );
 
 export const Layout = ({ children }: React.PropsWithChildren) => (
-  <SafeAreaView>
+  <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
     <View style={styles.logoView}>
       <Logo />
     </View>
     {children}
   </SafeAreaView>
 );
+
 
 
 const styles = StyleSheet.create({

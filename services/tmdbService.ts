@@ -52,3 +52,9 @@ export const getMovieRecommendations = async (movieId: number, page = 1) => {
   const response = await fetch(`${BASE_URL}/movie/${movieId}/recommendations?language=en-US&page=${page}`, getOptions);
   return handleResponse(response);
 };
+
+export const searchMovies = async (query: string, page = 1) => {
+  const response = await fetch(`${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${page}`, getOptions);
+  return handleResponse(response);
+};
+
