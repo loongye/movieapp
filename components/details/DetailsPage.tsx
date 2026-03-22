@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from 'react-native';
+import ISO6391 from 'iso-639-1';
 import { useMovieDetails, useMovieCredits, useMovieReleaseDates, useMovieRecommendations } from '../../hooks/useMovieQueries';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { Layout } from '../common/Layout';
@@ -278,7 +279,7 @@ export const DetailsPage = ({ route, navigation }: any) => {
                     <Text style={styles.boldLabel}>Status:</Text> {movie.status}
                 </Text>
                 <Text style={styles.metadataText}>
-                    <Text style={styles.boldLabel}>Original Language:</Text> {movie.spoken_languages?.[0]?.english_name || movie.original_language}
+                    <Text style={styles.boldLabel}>Original Language:</Text> {ISO6391.getName(movie.original_language) || movie.spoken_languages?.find((lang: any) => lang.iso_639_1 === movie.original_language)?.english_name || movie.original_language}
                 </Text>
             </View>
             </View>
