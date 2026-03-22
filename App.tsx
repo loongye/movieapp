@@ -28,6 +28,26 @@ const WatchlistIcon = ({ color, focused }: { color: string, focused: boolean }) 
   </Svg>
 );
 
+const HomeStack = createNativeStackNavigator();
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Home" component={Page} />
+      <HomeStack.Screen name="Details" component={DetailsPage} />
+    </HomeStack.Navigator>
+  );
+}
+
+const WatchlistStack = createNativeStackNavigator();
+function WatchlistStackScreen() {
+  return (
+    <WatchlistStack.Navigator screenOptions={{ headerShown: false }}>
+      <WatchlistStack.Screen name="Watchlist" component={WatchlistPage} />
+      <WatchlistStack.Screen name="Details" component={DetailsPage} />
+    </WatchlistStack.Navigator>
+  );
+}
+
 function MainTabs() {
   return (
     <Tab.Navigator
@@ -47,14 +67,14 @@ function MainTabs() {
     >
       <Tab.Screen
         name="HomeTab"
-        component={Page}
+        component={HomeStackScreen}
         options={{
           tabBarIcon: ({ color, focused }) => <HomeIcon color={color} focused={focused} />,
         }}
       />
       <Tab.Screen
         name="WatchlistTab"
-        component={WatchlistPage}
+        component={WatchlistStackScreen}
         options={{
           tabBarIcon: ({ color, focused }) => <WatchlistIcon color={color} focused={focused} />,
         }}
@@ -71,10 +91,7 @@ function App() {
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Main" component={MainTabs} />
-            <Stack.Screen name="Details" component={DetailsPage} />
-          </Stack.Navigator>
+          <MainTabs />
         </NavigationContainer>
       </SafeAreaProvider>
     </QueryClientProvider>
