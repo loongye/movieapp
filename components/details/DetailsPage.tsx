@@ -12,6 +12,8 @@ import {
 import { useMovieDetails, useMovieCredits, useMovieReleaseDates } from '../../hooks/useMovieQueries';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { Layout } from '../common/Layout';
+import { useAtom } from 'jotai';
+import { watchlistAtom } from '../../store/atoms';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -112,6 +114,7 @@ const CastCarousel = ({ cast }: { cast: any[] }) => {
 
 export const DetailsPage = ({ route, navigation }: any) => {
   const { movieId } = route.params;
+  const [watchlist, setWatchlist] = useAtom(watchlistAtom);
   const movieDetails = useMovieDetails(movieId);
   const movieCredits = useMovieCredits(movieId);
   const movieReleaseDates = useMovieReleaseDates(movieId);
@@ -249,11 +252,25 @@ export const DetailsPage = ({ route, navigation }: any) => {
           <Text style={styles.overviewTitle}>Overview</Text>
           <Text style={styles.overviewText}>{movie.overview}</Text>
           
-          <TouchableOpacity style={styles.watchlistButton}>
+          <TouchableOpacity 
+            style={[
+              styles.watchlistButton, 
+              watchlist.some((m: any) => m.id === movie.id) && styles.watchlistButtonActive
+            ]}
+            onPress={() => {
+              if (watchlist.some((m: any) => m.id === movie.id)) {
+                setWatchlist(watchlist.filter((m: any) => m.id !== movie.id));
+              } else {
+                setWatchlist([...watchlist, movie]);
+              }
+            }}
+          >
              <Svg width="16" height="16" viewBox="0 0 24 24" fill="white">
                 <Path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" />
             </Svg>
-            <Text style={styles.watchlistButtonText}>Add To Watchlist</Text>
+            <Text style={styles.watchlistButtonText}>
+              {watchlist.some((m: any) => m.id === movie.id) ? 'Remove From Watchlist' : 'Add To Watchlist'}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -468,6 +485,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     alignItems: 'center',
     alignSelf: 'flex-start',
+  },
+  watchlistButtonActive: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   watchlistButtonText: {
     color: 'white',
