@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
-    fontFamily: 'SourceSans3-SemiBold',
+    fontFamily: 'SourceSans3-Bold',
     color: '#737373',
   },
 });

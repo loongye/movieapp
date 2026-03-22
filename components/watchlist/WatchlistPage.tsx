@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 28,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
   },
   profileTextContainer: {
     flex: 1,
@@ -165,6 +166,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 22,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     marginBottom: 2,
   },
   profileMemberSince: {
@@ -178,6 +180,7 @@ const styles = StyleSheet.create({
   watchlistTitle: {
     fontSize: 22,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     marginBottom: 20,
   },

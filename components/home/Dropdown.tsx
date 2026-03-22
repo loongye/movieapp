@@ -109,8 +109,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: '#000',
   },
   divider: {

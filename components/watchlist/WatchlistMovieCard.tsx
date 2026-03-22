@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     flex: 1,
     marginRight: 8,

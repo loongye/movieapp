@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     marginBottom: 4,
   },

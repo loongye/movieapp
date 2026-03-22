@@ -365,6 +365,7 @@ const styles = StyleSheet.create({
     color: '#00B3E5',
     marginTop: 10,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
   },
   topContainer: {
     // Inherits base blue from container
@@ -397,6 +398,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: 'white',
     flexShrink: 1,
   },
@@ -445,6 +447,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
   },
   metadataText: {
     color: 'white',
@@ -455,6 +458,7 @@ const styles = StyleSheet.create({
   },
   boldLabel: {
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
   },
   detailsSection: {
     padding: 25,
@@ -486,10 +490,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
   },
   percentSymbol: {
     fontSize: 10,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: 'white',
     marginTop: 6,
   },
@@ -497,6 +503,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     marginTop: 10,
   },
   creditsContainer: {
@@ -510,6 +517,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     lineHeight: 22,
   },
   creditJob: {
@@ -529,6 +537,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     marginBottom: 12,
   },
   overviewText: {
@@ -555,6 +564,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     marginLeft: 10,
   },
   castSection: {
@@ -564,6 +574,7 @@ const styles = StyleSheet.create({
   castTitle: {
     fontSize: 24,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     paddingHorizontal: 25,
     marginBottom: 20,
@@ -598,6 +609,7 @@ const styles = StyleSheet.create({
   castName: {
     fontSize: 16,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     marginBottom: 2,
   },
@@ -626,6 +638,7 @@ const styles = StyleSheet.create({
   recommendationsTitle: {
     fontSize: 24,
     fontFamily: 'SourceSans3-Bold',
+    fontWeight: 'bold',
     color: '#000',
     paddingHorizontal: 25,
     marginBottom: 20,
