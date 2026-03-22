@@ -30,7 +30,9 @@ export const Layout = ({ children }: React.PropsWithChildren) => (
     <View style={styles.logoView}>
       <Logo />
     </View>
-    {children}
+    <View style={{ flex: 1 }}>
+      {children}
+    </View>
   </SafeAreaView>
 );
 
