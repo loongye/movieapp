@@ -321,8 +321,9 @@ export const DetailsPage = ({ route, navigation }: any) => {
               }
             }}
           >
-             <Svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                <Path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" />
+             <Svg width="13" height="16" viewBox="0 0 13 16" fill="none">
+                <Path d="M10.7031 0C11.4592 0 12.0732 0.622181 12.0732 1.3584V15.0908C12.0732 15.7187 11.7178 16 11.3535 16C11.1381 16 10.9239 15.9035 10.7109 15.7217L6.57129 12.1963C6.44265 12.0866 6.25871 12.0234 6.06738 12.0234C5.8759 12.0235 5.69169 12.0868 5.56348 12.1963L1.41016 15.7227C1.19798 15.9039 0.967745 16 0.751953 16C0.523885 15.9999 0.310815 15.8907 0.178711 15.7012C0.0683597 15.5426 0 15.337 0 15.0908V1.3584C0 0.622181 0.66386 0 1.41992 0H10.7031Z" fill="white" />
+                <Path d="M10.7031 0C11.4592 0 12.0732 0.622181 12.0732 1.3584V15.0908C12.0732 15.7187 11.7178 16 11.3535 16C11.1381 16 10.9239 15.9035 10.7109 15.7217L6.57129 12.1963C6.44265 12.0866 6.25871 12.0234 6.06738 12.0234C5.8759 12.0235 5.69169 12.0868 5.56348 12.1963L1.41016 15.7227C1.19798 15.9039 0.967745 16 0.751953 16C0.523885 15.9999 0.310815 15.8907 0.178711 15.7012C0.0683597 15.5426 0 15.337 0 15.0908V1.3584C0 0.622181 0.66386 0 1.41992 0H10.7031Z" stroke="#042541" />
             </Svg>
             <Text style={styles.watchlistButtonText}>
               {watchlist.some((m: any) => m.id === movie.id) ? 'Remove From Watchlist' : 'Add To Watchlist'}
@@ -461,8 +462,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   scoreContainer: {
+    flex: 1,
     alignItems: 'flex-start',
-    marginRight: 35,
   },
   scoreTextContainer: {
     position: 'absolute',
@@ -522,6 +523,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontFamily: 'SourceSans3-Italic',
+    fontStyle: 'italic',
     marginBottom: 25,
     opacity: 0.9,
   },
@@ -548,6 +550,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     alignItems: 'center',
     alignSelf: 'flex-start',
+    marginBottom: 20,
   },
   watchlistButtonActive: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
