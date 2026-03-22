@@ -43,7 +43,7 @@ export const WatchlistSortDropdown = () => {
       renderItem={renderItem}
       renderRightIcon={() => (
         <Svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ marginLeft: 5 }}>
-          <Path d="M6 9L12 15L18 9" stroke="#00B3E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <Path d="M6 9L12 15L18 9" stroke="#00B4E4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </Svg>
       )}
     />
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   dropdown: {
     height: 30,
     minWidth: 140,
-    borderBottomColor: '#00B3E5',
+    borderBottomColor: '#00B4E4',
     borderBottomWidth: 1,
   },
   containerStyle: {
@@ -64,13 +64,15 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
-    fontFamily: 'SourceSans3-Bold',
-    color: '#00B3E5',
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
+    color: '#00B4E4',
   },
   selectedTextStyle: {
     fontSize: 16,
-    fontFamily: 'SourceSans3-Bold',
-    color: '#00B3E5',
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
+    color: '#00B4E4',
   },
   iconStyle: {
     width: 20,
