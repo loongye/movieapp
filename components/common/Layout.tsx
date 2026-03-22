@@ -26,7 +26,7 @@ const Logo = () => (
 );
 
 export const Layout = ({ children }: React.PropsWithChildren) => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+  <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }} edges={['top', 'left', 'right']}>
     <View style={styles.logoView}>
       <Logo />
     </View>
