@@ -38,8 +38,9 @@ const styles = StyleSheet.create({
   input: {
     paddingHorizontal: 16,
     paddingVertical: 14,
-    fontSize: 18,
-    fontFamily: 'SourceSans3-Regular',
+    fontSize: 16,
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: '#000',
   },
 });

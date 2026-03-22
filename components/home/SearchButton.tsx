@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    fontSize: 22,
-    fontFamily: 'SourceSans3-Bold',
+    fontSize: 16,
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: '#737373',
   },
 });
