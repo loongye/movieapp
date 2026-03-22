@@ -1,24 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import * as tmdbService from '../services/tmdbService';
 
-export const useNowPlayingMovies = (page = 1) => {
+export const useNowPlayingMovies = (page = 1, sortBy = 'popularity.desc', enabled = true) => {
   return useQuery({
-    queryKey: ['movies', 'now_playing', page],
-    queryFn: () => tmdbService.getNowPlayingMovies(page),
+    queryKey: ['movies', 'now_playing', sortBy, page],
+    queryFn: () => tmdbService.getNowPlayingMovies(page, sortBy),
+    enabled,
   });
 };
 
-export const usePopularMovies = (page = 1) => {
+export const usePopularMovies = (page = 1, sortBy = 'popularity.desc', enabled = true) => {
   return useQuery({
-    queryKey: ['movies', 'popular', page],
-    queryFn: () => tmdbService.getPopularMovies(page),
+    queryKey: ['movies', 'popular', sortBy, page],
+    queryFn: () => tmdbService.getPopularMovies(page, sortBy),
+    enabled,
   });
 };
 
-export const useUpcomingMovies = (page = 1) => {
+export const useUpcomingMovies = (page = 1, sortBy = 'popularity.desc', enabled = true) => {
   return useQuery({
-    queryKey: ['movies', 'upcoming', page],
-    queryFn: () => tmdbService.getUpcomingMovies(page),
+    queryKey: ['movies', 'upcoming', sortBy, page],
+    queryFn: () => tmdbService.getUpcomingMovies(page, sortBy),
+    enabled,
   });
 };
 
@@ -53,11 +56,22 @@ export const useMovieRecommendations = (movieId: number, page = 1) => {
   });
 };
 
-export const useSearchMovies = (query: string, page = 1) => {
+export const useSearchMovies = (query: string, page = 1, enabled = true) => {
   return useQuery({
     queryKey: ['movies', 'search', query, page],
     queryFn: () => tmdbService.searchMovies(query, page),
-    enabled: !!query,
+    enabled: enabled && !!query,
   });
 };
+
+
+export const useDiscoverMovies = (sortBy: string, page = 1, enabled = true) => {
+  return useQuery({
+    queryKey: ['movies', 'discover', sortBy, page],
+    queryFn: () => tmdbService.getDiscoverMovies(sortBy, page),
+    enabled,
+  });
+};
+
+
 

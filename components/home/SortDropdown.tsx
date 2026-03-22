@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useAtom } from 'jotai';
 import { Dropdown } from './Dropdown';
+import { sortAtom } from '../../store/atoms';
 
 const SORT_OPTIONS = [
   'By alphabetical order',
@@ -7,28 +9,16 @@ const SORT_OPTIONS = [
   'By release date',
 ];
 
-interface SortDropdownProps {
-  onSortChange?: (sortOption: string) => void;
-  initialSort?: string;
-}
-
-export const SortDropdown: React.FC<SortDropdownProps> = ({
-  onSortChange,
-  initialSort = 'By alphabetical order',
-}) => {
-  const [selectedSort, setSelectedSort] = useState(initialSort);
-
-  const handleSelect = (sortOption: string) => {
-    setSelectedSort(sortOption);
-    onSortChange?.(sortOption);
-  };
+export const SortDropdown: React.FC = () => {
+  const [selectedSort, setSelectedSort] = useAtom(sortAtom);
 
   return (
     <Dropdown
       label="Sort by"
       value={selectedSort}
       options={SORT_OPTIONS}
-      onSelect={handleSelect}
+      onSelect={setSelectedSort}
     />
   );
 };
+

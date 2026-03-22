@@ -52,7 +52,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
       style={styles.container}
     >
       <Pressable style={styles.header} onPress={toggleExpand}>
-        <Text style={styles.headerText}>{label || value}</Text>
+        <Text style={styles.headerText}>{label ? `${label}: ${value}` : value}</Text>
+
         <ChevronIcon direction={isExpanded ? 'down' : 'right'} />
       </Pressable>
 

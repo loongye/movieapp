@@ -1,26 +1,24 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
+import { useAtom } from 'jotai';
+import { searchTextAtom } from '../../store/atoms';
 
-interface SearchBarProps {
-  onSearch?: (text: string) => void;
-  placeholder?: string;
-}
+export const SearchBar: React.FC = () => {
+  const [searchText, setSearchText] = useAtom(searchTextAtom);
 
-export const SearchBar: React.FC<SearchBarProps> = ({
-  onSearch,
-  placeholder = 'Search...',
-}) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder={placeholder}
+        placeholder="Search..."
         placeholderTextColor="#9CA3AF"
-        onChangeText={onSearch} // This already exists, keeping it for clarity
+        value={searchText}
+        onChangeText={setSearchText}
       />
     </View>
   );
 };
+
 
 
 const styles = StyleSheet.create({

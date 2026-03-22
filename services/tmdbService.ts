@@ -18,43 +18,60 @@ const handleResponse = async (response: Response) => {
   return response.json();
 };
 
-export const getNowPlayingMovies = async (page = 1) => {
-  const response = await fetch(`${BASE_URL}/movie/now_playing?language=en-US&page=${page}`, getOptions);
+const fetchFromTMDB = async (endpoint: string) => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, getOptions);
   return handleResponse(response);
 };
 
-export const getPopularMovies = async (page = 1) => {
-  const response = await fetch(`${BASE_URL}/movie/popular?language=en-US&page=${page}`, getOptions);
-  return handleResponse(response);
+
+const getTodayDate = () => new Date().toISOString().split('T')[0];
+const getOneMonthAgoDate = () => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - 1);
+  return date.toISOString().split('T')[0];
+};
+const getThreeMonthsFromNowDate = () => {
+  const date = new Date();
+  date.setMonth(date.getMonth() + 3);
+  return date.toISOString().split('T')[0];
 };
 
-export const getUpcomingMovies = async (page = 1) => {
-  const response = await fetch(`${BASE_URL}/movie/upcoming?language=en-US&page=${page}`, getOptions);
-  return handleResponse(response);
+export const getNowPlayingMovies = async (page = 1, sortBy = 'popularity.desc') => {
+  const today = getTodayDate();
+  const oneMonthAgo = getOneMonthAgoDate();
+  return fetchFromTMDB(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sortBy}&with_release_type=2|3&release_date.gte=${oneMonthAgo}&release_date.lte=${today}`);
 };
+
+export const getPopularMovies = async (page = 1, sortBy = 'popularity.desc') => {
+  return fetchFromTMDB(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sortBy}`);
+};
+
+export const getUpcomingMovies = async (page = 1, sortBy = 'popularity.desc') => {
+  const today = getTodayDate();
+  const threeMonthsFromNow = getThreeMonthsFromNowDate();
+  return fetchFromTMDB(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sortBy}&with_release_type=2|3&release_date.gte=${today}&release_date.lte=${threeMonthsFromNow}`);
+};
+
 
 export const getMovieDetails = async (movieId: number) => {
-  const response = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US`, getOptions);
-  return handleResponse(response);
+  return fetchFromTMDB(`/movie/${movieId}?language=en-US`);
 };
 
 export const getMovieCredits = async (movieId: number) => {
-  const response = await fetch(`${BASE_URL}/movie/${movieId}/credits?language=en-US`, getOptions);
-  return handleResponse(response);
+  return fetchFromTMDB(`/movie/${movieId}/credits?language=en-US`);
 };
 
 export const getAccountDetails = async () => {
-  const response = await fetch(`${BASE_URL}/account`, getOptions);
-  return handleResponse(response);
+  return fetchFromTMDB(`/account`);
 };
 
 export const getMovieRecommendations = async (movieId: number, page = 1) => {
-  const response = await fetch(`${BASE_URL}/movie/${movieId}/recommendations?language=en-US&page=${page}`, getOptions);
-  return handleResponse(response);
+  return fetchFromTMDB(`/movie/${movieId}/recommendations?language=en-US&page=${page}`);
 };
 
 export const searchMovies = async (query: string, page = 1) => {
-  const response = await fetch(`${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${page}`, getOptions);
-  return handleResponse(response);
+  return fetchFromTMDB(`/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${page}`);
 };
+
+
 
