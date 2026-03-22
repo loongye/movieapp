@@ -51,20 +51,20 @@ export const WatchlistMovieCard: React.FC<WatchlistMovieCardProps> = ({
       <View style={styles.content}>
         <View style={styles.headerRow}>
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
-            <TouchableOpacity onPress={onRemove} style={styles.removeButton}>
-                <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <Path 
-                        fillRule="evenodd" 
-                        clipRule="evenodd" 
-                        d="M6.18462 14.9923H5.75385C5.65385 14.8832 5.53077 14.8832 5.32308 14.6649C5.22308 14.5558 5 14.1193 5 13.9089C5 13.5815 5.22308 13.2464 5.32308 13.1451L8.43846 9.98836L5.33077 6.83946C5.23077 6.73813 5.00769 6.40298 5.00769 6.08341C5.00769 5.86517 5.23077 5.53781 5.33077 5.31957C5.65385 5.10133 5.86154 5 6.18462 5C6.50769 5 6.71538 5.10133 6.93846 5.31957L10.0538 8.35935L13.0692 5.31957C13.2769 5.10133 13.6 5 13.8231 5C14.1462 5 14.4538 5.10133 14.6769 5.31957C14.8846 5.53781 15 5.86517 15 6.08341C15 6.40298 14.8769 6.73034 14.6769 6.83946L11.5615 9.99615L14.6769 13.1528C14.8846 13.2542 15 13.5893 15 13.9167C15 14.1271 14.8769 14.5558 14.6769 14.6727C14.5769 14.891 14.4538 14.891 14.3538 15.0001H13.5C13.2769 14.891 13.1769 14.891 13.0692 14.6727L10.0538 11.633L6.93846 14.6727C6.83846 14.891 6.71538 14.891 6.61538 15.0001H6.18462V14.9923Z" 
-                        fill="#595959"
-                    />
-                </Svg>
-            </TouchableOpacity>
         </View>
         <Text style={styles.date}>{formatDate(releaseDate)}</Text>
         <Text style={styles.overview} numberOfLines={2}>{overview}</Text>
       </View>
+      <TouchableOpacity onPress={onRemove} style={styles.removeButton}>
+          <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <Path 
+                  fillRule="evenodd" 
+                  clipRule="evenodd" 
+                  d="M6.18462 14.9923H5.75385C5.65385 14.8832 5.53077 14.8832 5.32308 14.6649C5.22308 14.5558 5 14.1193 5 13.9089C5 13.5815 5.22308 13.2464 5.32308 13.1451L8.43846 9.98836L5.33077 6.83946C5.23077 6.73813 5.00769 6.40298 5.00769 6.08341C5.00769 5.86517 5.23077 5.53781 5.33077 5.31957C5.65385 5.10133 5.86154 5 6.18462 5C6.50769 5 6.71538 5.10133 6.93846 5.31957L10.0538 8.35935L13.0692 5.31957C13.2769 5.10133 13.6 5 13.8231 5C14.1462 5 14.4538 5.10133 14.6769 5.31957C14.8846 5.53781 15 5.86517 15 6.08341C15 6.40298 14.8769 6.73034 14.6769 6.83946L11.5615 9.99615L14.6769 13.1528C14.8846 13.2542 15 13.5893 15 13.9167C15 14.1271 14.8769 14.5558 14.6769 14.6727C14.5769 14.891 14.4538 14.891 14.3538 15.0001H13.5C13.2769 14.891 13.1769 14.891 13.0692 14.6727L10.0538 11.633L6.93846 14.6727C6.83846 14.891 6.71538 14.891 6.61538 15.0001H6.18462V14.9923Z" 
+                  fill="#595959"
+              />
+          </Svg>
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 };
@@ -115,28 +115,31 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   title: {
-    fontSize: 21,
-    fontFamily: 'SourceSans3-Bold',
-    fontWeight: '700',
+    fontSize: 16,
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: '#000',
     flex: 1,
     marginRight: 8,
   },
   removeButton: {
-    padding: 4,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    padding: 10,
   },
   date: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'SourceSans3-Regular',
     fontWeight: '400',
-    color: '#9CA3AF',
+    color: '#999999',
     marginBottom: 20,
   },
   overview: {
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: 'SourceSans3-Regular',
     fontWeight: '400',
-    color: '#595959',
-    lineHeight: 20,
+    color: '#000000',
+    lineHeight: 18,
   },
 });
