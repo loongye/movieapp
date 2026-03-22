@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from 'react-native';
-import { useMovieDetails, useMovieCredits, useMovieReleaseDates } from '../../hooks/useMovieQueries';
+import { useMovieDetails, useMovieCredits, useMovieReleaseDates, useMovieRecommendations } from '../../hooks/useMovieQueries';
 import Svg, { Circle, Path } from 'react-native-svg';
 import { Layout } from '../common/Layout';
 import { useAtom } from 'jotai';
@@ -123,14 +123,55 @@ const CastCarousel = ({ cast }: { cast: any[] }) => {
   );
 };
 
+const RecommendationsCarousel = ({ recommendations, navigation }: { recommendations: any[], navigation: any }) => {
+  return (
+    <View style={styles.recommendationsSection}>
+      <Text style={styles.recommendationsTitle}>Recommendations</Text>
+      <FlatList
+        data={recommendations.slice(0, 10)}
+        horizontal
+        showsHorizontalScrollIndicator={true}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity 
+            style={styles.recommendationCard}
+            onPress={() => navigation.push('Details', { movieId: item.id })}
+          >
+            <View style={styles.recommendationImageContainer}>
+                {item.backdrop_path ? (
+                  <Image
+                    source={{ uri: `${IMAGE_BASE_URL}${item.backdrop_path}` }}
+                    style={styles.recommendationImage}
+                  />
+                ) : (
+                  <PlaceholderImage style={styles.recommendationImage} />
+                )}
+            </View>
+            <View style={styles.recommendationInfo}>
+              <Text style={styles.recommendationName} numberOfLines={1}>
+                {item.title}
+              </Text>
+              <Text style={styles.recommendationPercent}>
+                {Math.round(item.vote_average * 10)}%
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        contentContainerStyle={styles.recommendationsList}
+      />
+    </View>
+  );
+};
+
 export const DetailsPage = ({ route, navigation }: any) => {
   const { movieId } = route.params;
   const [watchlist, setWatchlist] = useAtom(watchlistAtom);
   const movieDetails = useMovieDetails(movieId);
   const movieCredits = useMovieCredits(movieId);
   const movieReleaseDates = useMovieReleaseDates(movieId);
+  const recommendationsQuery = useMovieRecommendations(movieId);
 
-  if (movieDetails.isLoading || movieCredits.isLoading || movieReleaseDates.isLoading) {
+  if (movieDetails.isLoading || movieCredits.isLoading || movieReleaseDates.isLoading || recommendationsQuery.isLoading) {
     return (
       <Layout>
         <View style={styles.loadingContainer}>
@@ -156,6 +197,7 @@ export const DetailsPage = ({ route, navigation }: any) => {
   const movie = movieDetails.data;
   const credits = movieCredits.data;
   const releaseData = movieReleaseDates.data;
+  const recommendations = recommendationsQuery.data?.results || [];
 
   // Find SG rating if available, otherwise fallback to US or first found
   const getRating = () => {
@@ -291,6 +333,11 @@ export const DetailsPage = ({ route, navigation }: any) => {
 
         {/* Cast Section */}
         {credits?.cast && <CastCarousel cast={credits.cast} />}
+
+        {/* Recommendations Section */}
+        {recommendations.length > 0 && (
+          <RecommendationsCarousel recommendations={recommendations} navigation={navigation} />
+        )}
       </ScrollView>
     </Layout>
   );
@@ -569,5 +616,53 @@ const styles = StyleSheet.create({
     color: '#9CA3AF',
     fontFamily: 'SourceSans3-Regular',
     marginTop: 5,
+  },
+  recommendationsSection: {
+    paddingVertical: 30,
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+  },
+  recommendationsTitle: {
+    fontSize: 24,
+    fontFamily: 'SourceSans3-Bold',
+    color: '#000',
+    paddingHorizontal: 25,
+    marginBottom: 20,
+  },
+  recommendationsList: {
+    paddingHorizontal: 20,
+  },
+  recommendationCard: {
+    width: 250,
+    marginHorizontal: 8,
+    marginBottom: 15,
+  },
+  recommendationImageContainer: {
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#E5E7EB',
+    marginBottom: 8,
+  },
+  recommendationImage: {
+    width: '100%',
+    height: 140,
+  },
+  recommendationInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  recommendationName: {
+    fontSize: 16,
+    fontFamily: 'SourceSans3-Regular',
+    color: '#000',
+    flex: 1,
+    marginRight: 10,
+  },
+  recommendationPercent: {
+    fontSize: 16,
+    fontFamily: 'SourceSans3-Regular',
+    color: '#000',
   },
 });
