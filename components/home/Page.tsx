@@ -14,12 +14,12 @@ import { SearchButton } from "./SearchButton";
 
 
 const PageHeader = React.memo(({ handleSearch, submittedSearch, activeCategory }: any) => (
-  <View style={{ paddingHorizontal: 29, marginBottom: 10 }}>
+  <View style={{ paddingHorizontal: 29, marginBottom: 30 }}>
     <CategoryDropdown />
     <SortDropdown />
     <SearchBar />
     <SearchButton onPress={handleSearch} />
-    {(submittedSearch || activeCategory) ? (
+    {(submittedSearch) ? (
       <Text style={{ 
         fontSize: 22, 
         fontFamily: 'SourceSans3-Bold', 
@@ -27,7 +27,7 @@ const PageHeader = React.memo(({ handleSearch, submittedSearch, activeCategory }
         marginTop: 20,
         marginBottom: 10
       }}>
-        {submittedSearch ? `Search Results: ${submittedSearch}` : `${activeCategory} Movies`}
+        Search Results: {submittedSearch}
       </Text>
     ) : null}
   </View>
