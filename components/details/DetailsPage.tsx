@@ -256,7 +256,6 @@ export const DetailsPage = ({ route, navigation }: any) => {
 
             {/* Top Info Section */}
             <View style={styles.topInfoSection}>
-            <View style={styles.posterShadow}>
                 {movie.poster_path ? (
                   <Image
                       source={{ uri: `${IMAGE_BASE_URL}${movie.poster_path}` }}
@@ -265,7 +264,6 @@ export const DetailsPage = ({ route, navigation }: any) => {
                 ) : (
                   <PlaceholderImage style={styles.poster} text="No Poster" />
                 )}
-            </View>
             <View style={styles.movieMetadata}>
                 <View style={styles.ratingBox}>
                 <Text style={styles.ratingText}>{getRating()}</Text>
@@ -397,8 +395,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 24,
-    fontFamily: 'SourceSans3-Bold',
-    fontWeight: 'bold',
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: 'white',
     flexShrink: 1,
   },
@@ -416,16 +414,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 25,
   },
-  posterShadow: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 15,
-    elevation: 10,
-  },
   poster: {
-    width: 120,
-    height: 180,
+    width: 111.87,
+    height: 145,
     borderRadius: 8,
   },
   movieMetadata: {
@@ -444,10 +435,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   ratingText: {
-    color: 'white',
+    color: '#FFFFFFB2',
     fontSize: 16,
-    fontFamily: 'SourceSans3-Bold',
-    fontWeight: 'bold',
+    fontFamily: 'SourceSans3-Regular',
+    fontWeight: '400',
   },
   metadataText: {
     color: 'white',
