@@ -107,9 +107,9 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   title: {
-    fontSize: 18,
-    fontFamily: 'SourceSans3-Bold',
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'SourceSans3-SemiBold',
+    fontWeight: '600',
     color: '#000',
     flex: 1,
     marginRight: 8,
@@ -120,12 +120,14 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
     fontFamily: 'SourceSans3-Regular',
+    fontWeight: '400',
     color: '#9CA3AF',
     marginBottom: 8,
   },
   overview: {
     fontSize: 14,
     fontFamily: 'SourceSans3-Regular',
+    fontWeight: '400',
     color: '#4B5563',
     lineHeight: 18,
   },
