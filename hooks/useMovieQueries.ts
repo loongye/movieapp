@@ -41,6 +41,14 @@ export const useMovieCredits = (movieId: number) => {
   });
 };
 
+export const useMovieReleaseDates = (movieId: number) => {
+  return useQuery({
+    queryKey: ['movie', movieId, 'release_dates'],
+    queryFn: () => tmdbService.getMovieReleaseDates(movieId),
+    enabled: !!movieId,
+  });
+};
+
 export const useAccountDetails = () => {
   return useQuery({
     queryKey: ['account'],

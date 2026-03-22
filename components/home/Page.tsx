@@ -5,7 +5,6 @@ import { categoryAtom, sortAtom, searchTextAtom, submittedSearchAtom, activeCate
 
 import { useNowPlayingMovies, usePopularMovies, useUpcomingMovies, useSearchMovies } from "../../hooks/useMovieQueries";
 
-
 import { MovieCard } from "./MovieCard";
 import { Layout } from "../common/Layout";
 import { CategoryDropdown } from "./CategoryDropdown";
@@ -34,7 +33,7 @@ const PageHeader = React.memo(({ handleSearch, submittedSearch, activeCategory }
   </View>
 ));
 
-export const Page = () => {
+export const Page = ({ navigation }: any) => {
   const [category] = useAtom(categoryAtom);
   const [sort] = useAtom(sortAtom);
   const [searchText] = useAtom(searchTextAtom);
@@ -93,6 +92,7 @@ export const Page = () => {
               releaseDate={item.release_date}
               overview={item.overview}
               posterPath={item.poster_path}
+              onPress={() => navigation.navigate('Details', { movieId: item.id })}
             />
           </View>
         )}

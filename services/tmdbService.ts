@@ -61,6 +61,14 @@ export const getMovieCredits = async (movieId: number) => {
   return fetchFromTMDB(`/movie/${movieId}/credits?language=en-US`);
 };
 
+export const getMovieReleaseDates = async (movieId: number) => {
+  return fetchFromTMDB(`/movie/${movieId}/release_dates`);
+};
+
+export const getDiscoverMovies = async (sortBy = 'popularity.desc', page = 1) => {
+  return fetchFromTMDB(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sortBy}`);
+};
+
 export const getAccountDetails = async () => {
   return fetchFromTMDB(`/account`);
 };

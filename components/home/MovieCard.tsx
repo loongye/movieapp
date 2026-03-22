@@ -1,11 +1,12 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 interface MovieCardProps {
   title: string;
   releaseDate: string;
   overview: string;
   posterPath: string | null;
+  onPress: () => void;
 }
 
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -15,6 +16,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   releaseDate,
   overview,
   posterPath,
+  onPress,
 }) => {
   const imageUrl = posterPath ? `${IMAGE_BASE_URL}${posterPath}` : null;
 
@@ -30,7 +32,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.posterContainer}>
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.poster} resizeMode="cover" />
@@ -45,7 +47,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
         <Text style={styles.date}>{formatDate(releaseDate)}</Text>
         <Text style={styles.overview} numberOfLines={3}>{overview}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
