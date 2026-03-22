@@ -1,15 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useAtom } from 'jotai';
-import { watchlistAtom } from '../../store/atoms';
+import { watchlistAtom, watchlistSortAtom, watchlistOrderAtom } from '../../store/atoms';
 import { WatchlistMovieCard } from './WatchlistMovieCard';
+import { WatchlistSortDropdown } from './WatchlistSortDropdown';
 import { Layout } from '../common/Layout';
 import { useAccountDetails } from '../../hooks/useMovieQueries';
-import Svg, { Path, Circle } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 
 export const WatchlistPage = ({ navigation }: any) => {
   const [watchlist, setWatchlist] = useAtom(watchlistAtom);
+  const [sortValue] = useAtom(watchlistSortAtom);
+  const [orderValue, setOrderValue] = useAtom(watchlistOrderAtom);
   const { data: account, isLoading: isAccountLoading } = useAccountDetails();
+
+  const sortedWatchlist = React.useMemo(() => {
+    const list = [...watchlist];
+    list.sort((a, b) => {
+      let comparison = 0;
+      if (sortValue === 'Alphabetical') {
+        comparison = a.title.localeCompare(b.title);
+      } else if (sortValue === 'Rating') {
+        comparison = a.vote_average - b.vote_average;
+      } else if (sortValue === 'Release Date') {
+        const dateA = new Date(a.release_date || 0).getTime();
+        const dateB = new Date(b.release_date || 0).getTime();
+        comparison = dateA - dateB;
+      }
+      return orderValue === 'asc' ? comparison : -comparison;
+    });
+    return list;
+  }, [watchlist, sortValue, orderValue]);
 
   const renderProfileHeader = () => {
     if (isAccountLoading) {
@@ -49,7 +70,7 @@ export const WatchlistPage = ({ navigation }: any) => {
   return (
     <Layout>
       <FlatList
-        data={watchlist}
+        data={sortedWatchlist}
         keyExtractor={(item) => item.id.toString()}
         ListHeaderComponent={
           <>
@@ -60,19 +81,23 @@ export const WatchlistPage = ({ navigation }: any) => {
               <View style={styles.controlsRow}>
                 <View style={styles.filterContainer}>
                   <Text style={styles.controlLabel}>Filter by:</Text>
-                  <TouchableOpacity style={styles.dropdownButton}>
-                    <Text style={styles.dropdownText}>Rating</Text>
-                    <Svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <Path d="M6 9L12 15L18 9" stroke="#00B3E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </Svg>
-                  </TouchableOpacity>
+                  <WatchlistSortDropdown />
                 </View>
 
                 <View style={styles.orderContainer}>
                   <Text style={styles.controlLabel}>Order:</Text>
-                  <TouchableOpacity style={styles.orderButton}>
+                  <TouchableOpacity 
+                    style={styles.orderButton}
+                    onPress={() => setOrderValue(orderValue === 'asc' ? 'desc' : 'asc')}
+                  >
                     <Svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      <Path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <Path 
+                          d={orderValue === 'asc' ? "M12 5V19M12 19L5 12M12 19L19 12" : "M12 19V5M12 5L5 12M12 5L19 12"} 
+                          stroke="black" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                        />
                     </Svg>
                   </TouchableOpacity>
                 </View>
@@ -164,30 +189,17 @@ const styles = StyleSheet.create({
   filterContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 25,
+    marginRight: 20,
   },
   orderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   controlLabel: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'SourceSans3-Regular',
     color: '#9CA3AF',
-    marginRight: 8,
-  },
-  dropdownButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#00B3E5',
-    paddingBottom: 2,
-  },
-  dropdownText: {
-    fontSize: 16,
-    fontFamily: 'SourceSans3-Bold',
-    color: '#00B3E5',
-    marginRight: 5,
+    marginRight: 10,
   },
   orderButton: {
     padding: 2,

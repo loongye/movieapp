@@ -11,5 +11,7 @@ export const submittedSearchAtom = atomWithStorage<string>('submittedSearch', ''
 export const activeCategoryAtom = atomWithStorage<string>('activeCategory', 'Now Playing', storage);
 export const activeSortAtom = atomWithStorage<string>('activeSort', 'By alphabetical order', storage);
 export const watchlistAtom = atomWithStorage<any[]>('watchlist', [], storage);
+export const watchlistSortAtom = atomWithStorage<string>('watchlistSort', 'Rating', storage);
+export const watchlistOrderAtom = atomWithStorage<'asc' | 'desc'>('watchlistOrder', 'desc', storage);
 
 
