@@ -461,7 +461,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   scoreContainer: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginRight: 35,
   },
   scoreTextContainer: {
